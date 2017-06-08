@@ -1,7 +1,8 @@
 With Map;
 
-procedure Snake Is
-begin
-   Map;
+Procedure Snake Is
+Begin
+   Map.Make;
    delay Duration(10);
-end Snake;
+   Map.Destroy;
+End Snake;

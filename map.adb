@@ -1,12 +1,19 @@
-with Terminal_Interface.Curses;
-with Ada.Text_Io;
+With Terminal_Interface.Curses;
 
-Procedure Map Is
+Package Body  Map Is
    W : Terminal_Interface.Curses.Window;
-Begin
-   Ada.Text_Io.Put_Line ("Hello World!");
-   Terminal_Interface.Curses.Init_Screen;
-   W := Terminal_Interface.Curses.Create (20, 20, 20, 20);
-   Terminal_Interface.Curses.Border(W);
-   Terminal_Interface.Curses.Refresh(W);
-End Map;
+   
+   Procedure Make Is
+   Begin
+      Terminal_Interface.Curses.Init_Screen;
+      W := Terminal_Interface.Curses.Create (20, 20, 0, 0);
+      Terminal_Interface.Curses.Border (W);
+      Terminal_Interface.Curses.Refresh (W);
+   End Make;
+   
+   Procedure Destroy Is
+   Begin
+      Terminal_Interface.Curses.End_Windows;
+   End Destroy;
+   
+ End Map;
