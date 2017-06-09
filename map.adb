@@ -1,19 +1,31 @@
 With Terminal_Interface.Curses;
 
 Package Body  Map Is
-   W : Terminal_Interface.Curses.Window;
+   Width : Terminal_Interface.Curses.Line_Count;
+   Height : Terminal_Interface.Curses.Column_Count;
    
-   Procedure Make Is
+   Procedure Set_Width 
+     (New_Width : Terminal_Interface.Curses.Line_Count)
+   Is
    Begin
-      Terminal_Interface.Curses.Init_Screen;
-      W := Terminal_Interface.Curses.Create (20, 20, 0, 0);
-      Terminal_Interface.Curses.Border (W);
-      Terminal_Interface.Curses.Refresh (W);
-   End Make;
+      Width := New_Width;
+   End Set_Width;
    
-   Procedure Destroy Is
+   Procedure Set_Height 
+     (New_Height : Terminal_Interface.Curses.Column_Count)
+   Is
    Begin
-      Terminal_Interface.Curses.End_Windows;
-   End Destroy;
+      Height := New_Height;
+   End Set_Height;
+   
+   Function Get_Width Return Terminal_Interface.Curses.Line_Count Is
+   Begin
+      Return Width;
+   End Get_Width;
+   
+   Function Get_Height Return Terminal_Interface.Curses.Column_Count Is
+   Begin
+      Return Height;
+   End Get_Height;
    
  End Map;
