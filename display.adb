@@ -12,6 +12,7 @@ Package Body Display Is
       V := Terminal_Interface.Curses.Invisible;
       Terminal_Interface.Curses.Init_Screen;
       W := Terminal_Interface.Curses.Create (Map.Get_Width, Map.Get_Height, 0, 0);
+      Terminal_Interface.Curses.Set_Timeout_Mode (W, Terminal_Interface.Curses.Delayed, 1000);
       Terminal_Interface.Curses.Set_Keypad_Mode (W, True);
       Terminal_Interface.Curses.Set_Echo_Mode (False);
       Terminal_Interface.Curses.Set_Cursor_Visibility (V);
@@ -26,6 +27,8 @@ Package Body Display Is
      (W : Terminal_Interface.Curses.Window)
    Is
    Begin
+      --  Terminal_Interface.Curses.Clear (W);
+      Terminal_Interface.Curses.Border (W);
       Terminal_Interface.Curses.Add (W, Player.Get_X, Player.Get_Y, '#');
       Terminal_Interface.Curses.Refresh (W);
    End Refresh;

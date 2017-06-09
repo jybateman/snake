@@ -20,7 +20,9 @@ Package Player Is
    Function Get_Dir
      Return Terminal_Interface.Curses.Real_Key_Code;
    
-   Procedure Move 
+   Procedure Move;
+   
+   Procedure Change_Dir
      (New_Dir : Terminal_Interface.Curses.Real_Key_Code);
      
 End Player;

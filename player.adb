@@ -1,4 +1,5 @@
 With Terminal_Interface.Curses; Use Terminal_Interface.Curses;
+With Map;
 
 Package Body Player Is
    X : Terminal_Interface.Curses.Line_Count;
@@ -41,23 +42,38 @@ Package Body Player Is
       Return Dir;
    End Get_Dir;
 
-   Procedure Move 
-     (New_Dir : Terminal_Interface.Curses.Real_Key_Code)
-   Is
+   Procedure Move Is
    Begin
-      Case New_Dir Is
+      Case Dir Is
 	 When Terminal_Interface.Curses.Key_Up =>
-	    X := X - 1;
+	    If X-1 > 0 then
+	       X := X - 1;
+	    End If;
 	 When Terminal_Interface.Curses.Key_Down =>
-	    X := X + 1;      	 
+	    If X+2 < Map.Get_Width then
+	       X := X + 1;      	 
+	    End If;
 	 When Terminal_Interface.Curses.Key_Left =>
-	    Y := Y - 1;
+	    If Y-1 > 0 then
+	       Y := Y - 1;
+	    End If;
 	 When Terminal_Interface.Curses.Key_Right =>
-	    Y := Y + 1;
+	    If Y+2 < Map.Get_Height then
+	       Y := Y + 1;
+	    End If;
 	 When Others =>
 	    Return;
       End Case;
    End Move;
+
+   Procedure Change_Dir
+     (New_Dir : Terminal_Interface.Curses.Real_Key_Code)
+   Is
+   Begin
+      If New_Dir = Terminal_Interface.Curses.Key_Up Or Else New_Dir = Terminal_Interface.Curses.Key_Down Or Else New_Dir = Terminal_Interface.Curses.Key_Right Or Else New_Dir = Terminal_Interface.Curses.Key_Left Then
+	 Dir := New_Dir;
+      End If;
+   End Change_Dir;
    
 Begin
    X := 1;
