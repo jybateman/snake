@@ -13,4 +13,5 @@ Package Display Is
    
    Procedure Display_Map
           (W : Terminal_Interface.Curses.Window);
+   
 End Display; 

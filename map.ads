@@ -1,7 +1,7 @@
 With Terminal_Interface.Curses;
 
 Package Map Is   
-      
+   
    Procedure Set_Width 
      (New_Width : Terminal_Interface.Curses.Line_Count);
    
