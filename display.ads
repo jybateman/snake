@@ -12,6 +12,9 @@ Package Display Is
      (W : Terminal_Interface.Curses.Window);
    
    Procedure Display_Map
-          (W : Terminal_Interface.Curses.Window);
+     (W : Terminal_Interface.Curses.Window);
+   
+   Procedure Remove_Tail
+     (W : Terminal_Interface.Curses.Window);   
    
 End Display; 
