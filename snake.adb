@@ -27,7 +27,7 @@ Begin
    Terminal_Interface.Curses.Set_Timeout_Mode (W, Terminal_Interface.Curses.Delayed, Base_Time);
    Display.Refresh (W);
    
-   --  Player.Grow;
+   Player.Grow;
 Game_Loop :
    Loop
       Key := Terminal_Interface.Curses.Get_Keystroke (W);

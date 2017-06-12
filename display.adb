@@ -1,3 +1,4 @@
+With Ada.Text_Io;
 with Ada.Containers.Vectors;
 With Terminal_Interface.Curses;
 With Map;
@@ -33,15 +34,12 @@ Package Body Display Is
       Cursor := Player.Coord_Vectors.First(Position);
    Vector_Loop:
       While Player.Coord_Vectors.Has_Element(Cursor) Loop
+	 --  Ada.Text_Io.Put (Integer'Image (Integer (Player.Coord_Vectors.Element(Cursor).X)));
+	 --  Ada.Text_Io.Put (Integer'Image (Integer (Player.Coord_Vectors.Element(Cursor).Y)));
 	 Terminal_Interface.Curses.Add (W, Player.Coord_Vectors.Element(Cursor).X, Player.Coord_Vectors.Element(Cursor).Y, '#');
 	 Player.Coord_Vectors.Next(Cursor);
       End Loop Vector_Loop;
-      
-      --  Array_Loop :
-      --     --  While 
-      --     for I in Position'Range Loop
-      --     	 Terminal_Interface.Curses.Add (W, Position(I).X, Position(I).Y, '#');
-      --     end loop Array_Loop;
+      --  Ada.Text_Io.New_Line;      
       Terminal_Interface.Curses.Refresh (W);
    End Refresh;
    

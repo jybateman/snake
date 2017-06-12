@@ -36,10 +36,22 @@ Package Body Player Is
    
    Procedure Move_Body Is
       Cursor : Player.Coord_Vectors.Cursor;
+      Peek_Cursor : Player.Coord_Vectors.Cursor;
+      
+      Procedure Update_Body
+	(Element : In Out Coord) Is
+      Begin
+	 Element.X := Player.Coord_Vectors.Element(Cursor).X;
+	 Element.Y := Player.Coord_Vectors.Element(Cursor).Y;
+      End Update_Body;
    Begin  
       Cursor := Player.Coord_Vectors.First(Position);
    Vector_Loop:
       While Player.Coord_Vectors.Has_Element(Cursor) Loop
+	 Peek_Cursor := Player.Coord_Vectors.Next(Cursor);
+	 If Player.Coord_Vectors.Has_Element(Peek_Cursor) Then
+	    Position.Update_Element(Peek_Cursor, Update_Body'Access);
+	 End If;
 	 Player.Coord_Vectors.Next(Cursor);
       End Loop Vector_Loop;
    End Move_Body;
@@ -69,16 +81,15 @@ Package Body Player Is
 	(Element : In Out Coord) Is
       Begin
 	 Element.Y := Element.Y + 1;	 
-	 End Right;
+      End Right;
    Begin
       --  Ada.Text_Io.Put_Line (Integer'Image (Integer (Position (Position'First).X)));
-      --  Ada.Text_Io.Put_Line (Integer'Image (Position'Length));
+      --  Ada.Text_Io.Put_Line (Integer'Image (Integer(Position.Length)));
       
       Case Dir Is
 	 When Terminal_Interface.Curses.Key_Up =>
 	    If Position.First_Element.X-1 > 0 Then
 	       Move_Body;
-	       --  Position.First_Element.X := Position.First_Element.X - 1;
 	       Position.Update_Element(Cursor, Up'Access);
 	    End If;
 	 When Terminal_Interface.Curses.Key_Down =>
@@ -110,15 +121,11 @@ Package Body Player Is
       End If;
    End Change_Dir;
    
-   Procedure Grow Is
+   Procedure Grow Is   
    Begin
-      --  New_Pair.X := Position(Position'Last).X;
-      --  New_Pair.Y := Position(Position'Last).Y;
-      
-      --  Position := Position & New_Pair;
-      Return;      
+      Position.Append(Coord'(Position.Last_Element.X, Position.Last_Element.Y));
    End Grow;
    
-Begin   
+Begin
    Position.Append(Coord'(1, 1));
 End Player;
