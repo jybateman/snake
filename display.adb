@@ -1,3 +1,4 @@
+with Ada.Containers.Vectors;
 With Terminal_Interface.Curses;
 With Map;
 With Player;
@@ -26,10 +27,21 @@ Package Body Display Is
    Procedure Refresh
      (W : Terminal_Interface.Curses.Window)
    Is
+      Position : Player.Coord_Vectors.Vector := Player.Get_Body;
+      Cursor : Player.Coord_Vectors.Cursor;
    Begin
-      --  Terminal_Interface.Curses.Clear (W);
-      Terminal_Interface.Curses.Border (W);
-      Terminal_Interface.Curses.Add (W, Player.Get_X, Player.Get_Y, '#');
+      Cursor := Player.Coord_Vectors.First(Position);
+   Vector_Loop:
+      While Player.Coord_Vectors.Has_Element(Cursor) Loop
+	 Terminal_Interface.Curses.Add (W, Player.Coord_Vectors.Element(Cursor).X, Player.Coord_Vectors.Element(Cursor).Y, '#');
+	 Player.Coord_Vectors.Next(Cursor);
+      End Loop Vector_Loop;
+      
+      --  Array_Loop :
+      --     --  While 
+      --     for I in Position'Range Loop
+      --     	 Terminal_Interface.Curses.Add (W, Position(I).X, Position(I).Y, '#');
+      --     end loop Array_Loop;
       Terminal_Interface.Curses.Refresh (W);
    End Refresh;
    

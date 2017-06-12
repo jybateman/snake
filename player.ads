@@ -1,4 +1,5 @@
 With Terminal_Interface.Curses;
+with Ada.Containers.Vectors;
 
 Package Player Is
    type Coord is record
@@ -6,19 +7,11 @@ Package Player Is
       Y : Terminal_Interface.Curses.Column_Count;
    end record;
    type Pair_Coord is array (Positive range <>) of Coord;
+   Package Coord_Vectors is new Ada.Containers.Vectors(Natural, Coord);
    
-   Procedure Set_X
-   (New_X : Terminal_Interface.Curses.Line_Count);
-   
-   Function Get_X
-     Return Terminal_Interface.Curses.Line_Count;
-   
-   Procedure Set_Y
-     (New_Y : Terminal_Interface.Curses.Column_Count);
-   
-   Function Get_Y
-     Return Terminal_Interface.Curses.Column_Count;
-   
+   Function Get_Body
+     Return Coord_Vectors.Vector;
+
    Procedure Set_Dir
      (New_Dir : Terminal_Interface.Curses.Real_Key_Code);
    
@@ -35,5 +28,7 @@ Package Player Is
    
    Procedure Change_Dir
      (New_Dir : Terminal_Interface.Curses.Real_Key_Code);
+     
+   Procedure Grow;
      
 End Player;

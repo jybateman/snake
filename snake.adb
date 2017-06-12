@@ -12,13 +12,11 @@ Procedure Snake Is
    T2 : Ada.Calendar.Time;
    Timeout : Integer;
    
-   Base_Time : Constant Integer := 500;
+   Base_Time : Constant Integer := 200;
 Begin
    Map.Set_Width (20);
    Map.Set_Height (20);
    
-   Player.Set_X (1);
-   Player.Set_Y (1);
    Player.Set_Dir (Terminal_Interface.Curses.Key_Right);
    
    Display.Init (W);
@@ -28,6 +26,8 @@ Begin
    
    Terminal_Interface.Curses.Set_Timeout_Mode (W, Terminal_Interface.Curses.Delayed, Base_Time);
    Display.Refresh (W);
+   
+   --  Player.Grow;
 Game_Loop :
    Loop
       Key := Terminal_Interface.Curses.Get_Keystroke (W);
