@@ -3,6 +3,7 @@ with Ada.Containers.Vectors;
 With Terminal_Interface.Curses;
 With Map;
 With Player;
+With Food;
 
 Package Body Display Is
    
@@ -30,8 +31,12 @@ Package Body Display Is
    Is
       Position : Player.Coord_Vectors.Vector := Player.Get_Body;
       Cursor : Player.Coord_Vectors.Cursor;
-   Begin
+   Begin      
+      Terminal_Interface.Curses.Add (W, Food.Get_X, Food.Get_Y, '*');
       Cursor := Player.Coord_Vectors.First(Position);
+      
+      --  Ada.Text_Io.Put (Integer'Image (Integer (Position.Length)));
+      
    Vector_Loop:
       While Player.Coord_Vectors.Has_Element(Cursor) Loop
 	 --  Ada.Text_Io.Put (Integer'Image (Integer (Player.Coord_Vectors.Element(Cursor).X)));

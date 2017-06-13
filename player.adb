@@ -34,6 +34,14 @@ Package Body Player Is
       Ty := Position.Last_Element.Y;
    End Get_Tail;
    
+   Procedure Get_Head
+     (Hx : Out Terminal_Interface.Curses.Line_Count;
+      Hy : Out Terminal_Interface.Curses.Column_Count) Is
+   Begin
+      Hx := Position.First_Element.X;
+      Hy := Position.First_Element.Y;
+   End Get_Head;
+
    Procedure Move_Body Is
       Cursor : Player.Coord_Vectors.Cursor;
       Peek_Cursor : Player.Coord_Vectors.Cursor;
@@ -41,18 +49,16 @@ Package Body Player Is
       Procedure Update_Body
 	(Element : In Out Coord) Is
       Begin
-	 Element.X := Player.Coord_Vectors.Element(Cursor).X;
-	 Element.Y := Player.Coord_Vectors.Element(Cursor).Y;
+	 Element.X := Player.Coord_Vectors.Element(Peek_Cursor).X;
+	 Element.Y := Player.Coord_Vectors.Element(Peek_Cursor).Y;
       End Update_Body;
    Begin  
-      Cursor := Player.Coord_Vectors.First(Position);
+      Cursor := Player.Coord_Vectors.Last(Position);
    Vector_Loop:
-      While Player.Coord_Vectors.Has_Element(Cursor) Loop
-	 Peek_Cursor := Player.Coord_Vectors.Next(Cursor);
-	 If Player.Coord_Vectors.Has_Element(Peek_Cursor) Then
-	    Position.Update_Element(Peek_Cursor, Update_Body'Access);
-	 End If;
-	 Player.Coord_Vectors.Next(Cursor);
+      While Cursor /=  Player.Coord_Vectors.First(Position) Loop
+	 Peek_Cursor := Player.Coord_Vectors.Previous(Cursor);
+	 Position.Update_Element(Cursor, Update_Body'Access);
+	 Player.Coord_Vectors.Previous(Cursor);
       End Loop Vector_Loop;
    End Move_Body;
    
