@@ -17,13 +17,11 @@ Procedure Snake Is
    Hx : Terminal_Interface.Curses.Line_Count;
    Hy : Terminal_Interface.Curses.Column_Count;
    
-   Base_Time : Constant Integer := 100;
+   Base_Time : Constant Integer := 150;
    
-   --  Hx : Terminal_Interface.Curses.Line_Count;
-   --  Hy : Terminal_Interface.Curses.Column_Count;
 Begin
-   Map.Set_Width (Global.W);
-   Map.Set_Height (Global.H);
+   Map.Set_Width (Global.Width);
+   Map.Set_Height (Global.Height);         
    
    Player.Set_Dir (Terminal_Interface.Curses.Key_Right);
    
@@ -50,6 +48,7 @@ Game_Loop :
 	 Display.Remove_Tail (W);
 	 Player.Move;
 	 Display.Refresh (W);
+	 
 	 
 	 Player.Get_Head (Hx, Hy);
 	 If Food.Get_X = Hx And Then Food.Get_Y = Hy Then

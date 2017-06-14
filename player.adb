@@ -86,12 +86,9 @@ Package Body Player Is
       Procedure Right
 	(Element : In Out Coord) Is
       Begin
-	 Element.Y := Element.Y + 1;	 
+	 Element.Y := Element.Y + 1;
       End Right;
-   Begin
-      --  Ada.Text_Io.Put_Line (Integer'Image (Integer (Position (Position'First).X)));
-      --  Ada.Text_Io.Put_Line (Integer'Image (Integer(Position.Length)));
-      
+   Begin      
       Case Dir Is
 	 When Terminal_Interface.Curses.Key_Up =>
 	    If Position.First_Element.X-1 > 0 Then

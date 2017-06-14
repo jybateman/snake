@@ -4,6 +4,7 @@ With Terminal_Interface.Curses;
 With Map;
 With Player;
 With Food;
+With Global;
 
 Package Body Display Is
    
@@ -15,7 +16,6 @@ Package Body Display Is
       V := Terminal_Interface.Curses.Invisible;
       Terminal_Interface.Curses.Init_Screen;
       W := Terminal_Interface.Curses.Create (Map.Get_Width, Map.Get_Height, 0, 0);
-      --  Terminal_Interface.Curses.Set_Timeout_Mode (W, Terminal_Interface.Curses.Delayed, 500);
       Terminal_Interface.Curses.Set_Keypad_Mode (W, True);
       Terminal_Interface.Curses.Set_Echo_Mode (False);
       Terminal_Interface.Curses.Set_Cursor_Visibility (V);

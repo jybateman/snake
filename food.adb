@@ -4,9 +4,7 @@ With Ada.Numerics.Discrete_Random;
 With Map;
 With Player;
 
-Package Body Food Is
-   W : Terminal_Interface.Curses.Line_Count;
-   
+Package Body Food Is   
    X : Terminal_Interface.Curses.Line_Count;
    Y : Terminal_Interface.Curses.Column_Count;
    Gx : Random_X.Generator; 
@@ -47,15 +45,7 @@ Package Body Food Is
       Return;
    End New_Pos;
    
-Begin
-   W := Map.Get_Width;
-   Ada.Text_Io.New_Line;
-   Ada.Text_Io.New_Line;
-   Ada.Text_Io.New_Line;
-   Ada.Text_Io.New_Line;
-   Ada.Text_Io.New_Line;
-   Ada.Text_Io.Put_Line (Integer'Image (Integer (W)));
-   
+Begin   
    Random_X.Reset (Gx);
    Random_Y.Reset (Gy);
 End Food;
