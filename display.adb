@@ -1,6 +1,6 @@
 With Ada.Text_Io;
 with Ada.Containers.Vectors;
-With Terminal_Interface.Curses;
+With Terminal_Interface.Curses; Use Terminal_Interface.Curses;
 With Map;
 With Player;
 With Food;
@@ -67,4 +67,12 @@ Package Body Display Is
       Terminal_Interface.Curses.Refresh (W);
    End Remove_Tail;
    
+   Procedure Game_Over
+     (W : Terminal_Interface.Curses.Window)
+   Is
+   Begin
+      Terminal_Interface.Curses.Add (W, Map.Get_Width/2, Map.Get_Height/2-5, "GAME OVER!");
+      Terminal_Interface.Curses.Refresh (W);
+   End Game_Over;
+     
 End Display;

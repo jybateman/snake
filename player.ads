@@ -34,5 +34,10 @@ Package Player Is
      (New_Dir : Terminal_Interface.Curses.Real_Key_Code);
      
    Procedure Grow;
-     
+   
+   Function Is_Body
+     (Hx : Terminal_Interface.Curses.Line_Count;
+      Hy : Terminal_Interface.Curses.Column_Count)
+     Return Boolean;
+      
 End Player;

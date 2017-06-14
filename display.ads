@@ -17,4 +17,7 @@ Package Display Is
    Procedure Remove_Tail
      (W : Terminal_Interface.Curses.Window);   
    
+   Procedure Game_Over
+     (W : Terminal_Interface.Curses.Window);   
+
 End Display; 

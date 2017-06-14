@@ -54,11 +54,17 @@ Game_Loop :
 	 If Food.Get_X = Hx And Then Food.Get_Y = Hy Then
 	    Player.Grow;
 	    Food.New_Pos;
+	    End If;
+	    
+	 If Player.Is_Body (Hx, Hy) Then
+	    Display.Game_Over (W);
+	    delay Duration (3);
+	    Display.Destroy;
+	    Return;
 	 End If;
       Else
 	 Timeout := Base_Time - Integer ((T2-T1) * 1000);
 	 Terminal_Interface.Curses.Set_Timeout_Mode (W, Terminal_Interface.Curses.Delayed, Timeout);
       End If;
    End Loop Game_Loop;
-   --  Display.Destroy;
 End Snake;

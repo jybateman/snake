@@ -129,6 +129,23 @@ Package Body Player Is
       Position.Append(Coord'(Position.Last_Element.X, Position.Last_Element.Y));
    End Grow;
    
+   Function Is_Body
+     (Hx : Terminal_Interface.Curses.Line_Count;
+      Hy : Terminal_Interface.Curses.Column_Count)
+     Return Boolean Is
+      Cursor : Player.Coord_Vectors.Cursor;
+   Begin
+      Cursor := Player.Coord_Vectors.Last(Position);
+   Vector_Loop:
+      While Cursor /=  Player.Coord_Vectors.First(Position) Loop
+	 If Player.Coord_Vectors.Element(Cursor).X = Hx And Then Player.Coord_Vectors.Element(Cursor).Y = Hy Then
+	    Return True;
+	 End If;
+	 Player.Coord_Vectors.Previous(Cursor);
+      End Loop Vector_Loop;
+      Return False;
+   End Is_Body;
+   
 Begin
    Position.Append(Coord'(1, 1));
 End Player;
