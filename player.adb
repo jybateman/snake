@@ -119,9 +119,30 @@ Package Body Player Is
      (New_Dir : Terminal_Interface.Curses.Real_Key_Code)
    Is
    Begin
-      If New_Dir = Terminal_Interface.Curses.Key_Up Or Else New_Dir = Terminal_Interface.Curses.Key_Down Or Else New_Dir = Terminal_Interface.Curses.Key_Right Or Else New_Dir = Terminal_Interface.Curses.Key_Left Then
-	 Dir := New_Dir;
-      End If;
+      Case New_Dir Is
+	 When Terminal_Interface.Curses.Key_Up =>
+	    If Dir /= Terminal_Interface.Curses.Key_Down Then
+	       Dir := New_Dir;
+	    End If;
+	 When Terminal_Interface.Curses.Key_Down =>
+	    If Dir /= Terminal_Interface.Curses.Key_Up Then
+	       Dir := New_Dir;
+	    End If;
+	 When Terminal_Interface.Curses.Key_Left =>
+	    If Dir /= Terminal_Interface.Curses.Key_Right Then
+	       Dir := New_Dir;
+	    End If;
+	 When Terminal_Interface.Curses.Key_Right =>
+	    If Dir /= Terminal_Interface.Curses.Key_Left Then
+	       Dir := New_Dir;
+	    End If;
+	 When Others =>
+	    Return;
+      End Case;
+
+      --  If New_Dir = Terminal_Interface.Curses.Key_Up Or Else New_Dir = Terminal_Interface.Curses.Key_Down Or Else New_Dir = Terminal_Interface.Curses.Key_Right Or Else New_Dir = Terminal_Interface.Curses.Key_Left Then
+      --  	 Dir := New_Dir;
+      --  End If;
    End Change_Dir;
    
    Procedure Grow Is   
