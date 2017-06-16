@@ -15,6 +15,7 @@ Package Body Display Is
    Begin
       V := Terminal_Interface.Curses.Invisible;
       Terminal_Interface.Curses.Init_Screen;
+                  
       W := Terminal_Interface.Curses.Create (Map.Get_Width, Map.Get_Height, 0, 0);
       Terminal_Interface.Curses.Set_Keypad_Mode (W, True);
       Terminal_Interface.Curses.Set_Echo_Mode (False);

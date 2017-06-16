@@ -6,9 +6,11 @@ With Map;
 With Player;
 With Food;
 With Global;
+With Score;
 
 Procedure Snake Is
    W : Terminal_Interface.Curses.Window;
+   W_Score : Terminal_Interface.Curses.Window;
    Key : Terminal_Interface.Curses.Real_Key_Code;
    T1 : Ada.Calendar.Time;
    T2 : Ada.Calendar.Time;
@@ -29,6 +31,8 @@ Begin
    Display.Display_Map (W);
    Timeout := Base_Time;
    T1 := Ada.Calendar.Clock;
+   
+   Score.Init (W_Score);
    
    Terminal_Interface.Curses.Set_Timeout_Mode (W, Terminal_Interface.Curses.Delayed, Base_Time);
    
@@ -54,6 +58,7 @@ Game_Loop :
 	 If Food.Get_X = Hx And Then Food.Get_Y = Hy Then
 	    Player.Grow;
 	    Food.New_Pos;
+	    Score.Incr_Socre (W_Score);
 	    End If;
 	    
 	 If Player.Is_Body (Hx, Hy) Then

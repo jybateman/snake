@@ -139,10 +139,6 @@ Package Body Player Is
 	 When Others =>
 	    Return;
       End Case;
-
-      --  If New_Dir = Terminal_Interface.Curses.Key_Up Or Else New_Dir = Terminal_Interface.Curses.Key_Down Or Else New_Dir = Terminal_Interface.Curses.Key_Right Or Else New_Dir = Terminal_Interface.Curses.Key_Left Then
-      --  	 Dir := New_Dir;
-      --  End If;
    End Change_Dir;
    
    Procedure Grow Is   
